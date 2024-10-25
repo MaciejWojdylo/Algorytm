@@ -1,16 +1,18 @@
-# This is a sample Python script.
+sequences = []
+tmp = ""
+with open("seq1.fasta" , "r") as f:
+    for l in f:
+        if(l.startswith(">")):
+            if(tmp == ""):
+                continue
+            else:
+                sequences.append(tmp)
+                tmp = ""
+        else:
+            tmp+=l.strip().upper()
+if(tmp):
+    sequences.append(tmp)
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+matrix = [[0]*len(sequences[0])]*len(sequences[1])
+print(matrix)
+print(sequences)
