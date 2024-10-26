@@ -6,7 +6,7 @@ nameseq = []
 
 def main(file_path):
     try:
-        with open("seq1.fasta", "r") as f:
+        with open(file_path, "r") as f:
             tmp = ""
             for l in f:
                 if l.startswith(">"):
@@ -22,6 +22,7 @@ def main(file_path):
             sequences.append(tmp)
     except FileNotFoundError:
         print(f"Plik {file_path} nie został znaleziony.")
+        exit(1)
 
 def printMatrix(matrix):
     for row in matrix:
@@ -31,7 +32,7 @@ def printMatrix(matrix):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Program do odczytu pliku FASTA")
-    parser.add_argument("-i", "--input", default="seq1.fasta",help="Ścieżka do pliku FASTA")  # required=True w miejsce default  default="seq1.fasta"
+    parser.add_argument("-i", "--input", default="seq1.fasta",help="Ścieżka do pliku FASTA")
     parser.add_argument("-g", "--gap", default=-2)
     parser.add_argument("-m", "--match", default=1)
     parser.add_argument("-mm", "--missmatch", default=-1)
@@ -88,6 +89,9 @@ if(j!=0):
     seq2 += sequences[1][j - 1]
 else:
     seq2 += "-"
-print(seq1[::-1])
-print(seq2[::-1])
-#printMatrix(matrix)
+with open("output", "w") as f:
+    f.write("Result:")
+    f.write("\n")
+    f.write(seq1[::-1])
+    f.write("\n")
+    f.write(seq2[::-1])
