@@ -60,9 +60,7 @@ seq1 = ""
 seq2 = ""
 i = rows
 j = columns
-while i >= 0 and j >= 0:
-    seq1 += sequences[0][i-1]
-    seq2 += sequences[1][j-1]
+while i >= 1 and j >= 1:
     up = matrix[i-1][j]+gap
     left = matrix[i][j-1]+gap
     if(sequences[0][i-1] == sequences[1][j-1]):
@@ -70,12 +68,19 @@ while i >= 0 and j >= 0:
     else:
         diagonal = matrix[i-1][j-1] + missmatch
     if up == matrix[i][j]:
+        seq1 += sequences[0][i - 1]
+        seq2 += "-"
         i = i-1
     if left == matrix[i][j]:
+        seq1 += "-"
+        seq2 += sequences[1][j - 1]
         j = j-1
     if diagonal == matrix[i][j]:
+        seq1 += sequences[0][i - 1]
+        seq2 += sequences[1][j - 1]
         i = i-1
         j = j-1
-print(seq1)
-print(seq2)
+
+print(seq1[::-1])
+print(seq2[::-1])
 #printMatrix(matrix)
