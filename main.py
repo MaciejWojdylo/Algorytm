@@ -47,14 +47,35 @@ for i in range(1,rows+1):
     matrix[i][0] = matrix[i-1][0]+gap
 for j in range(1,columns+1):
     matrix[0][j] = matrix[0][j-1]+gap
-for i in range(1,columns+1):
-    for j in range(1,rows+1):
+for i in range(1,rows+1):
+    for j in range(1,columns+1):
         up= matrix[i-1][j]+gap
         left = matrix[i][j-1]+gap
         if sequences[0][i-1] == sequences[1][j-1]:
             diagonal = matrix[i-1][j-1] + match
         else:
-            diagonal = matrix[i][j-1] + missmatch
+            diagonal = matrix[i-1][j-1] + missmatch
         matrix[i][j] = max(up,left,diagonal)
-
-printMatrix(matrix)
+seq1 = ""
+seq2 = ""
+i = rows
+j = columns
+while i >= 0 and j >= 0:
+    seq1 += sequences[0][i-1]
+    seq2 += sequences[1][j-1]
+    up = matrix[i-1][j]+gap
+    left = matrix[i][j-1]+gap
+    if(sequences[0][i-1] == sequences[1][j-1]):
+        diagonal = matrix[i-1][j-1] + match
+    else:
+        diagonal = matrix[i-1][j-1] + missmatch
+    if up == matrix[i][j]:
+        i = i-1
+    if left == matrix[i][j]:
+        j = j-1
+    if diagonal == matrix[i][j]:
+        i = i-1
+        j = j-1
+print(seq1)
+print(seq2)
+#printMatrix(matrix)
