@@ -80,7 +80,14 @@ while i >= 1 and j >= 1:
         seq2 += sequences[1][j - 1]
         i = i-1
         j = j-1
-
+if(i!=0):
+    seq1 += sequences[0][i - 1]
+else :
+    seq1 += "-"
+if(j!=0):
+    seq2 += sequences[1][j - 1]
+else:
+    seq2 += "-"
 print(seq1[::-1])
 print(seq2[::-1])
 #printMatrix(matrix)
