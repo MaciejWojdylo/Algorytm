@@ -1,13 +1,16 @@
 import argparse
+
 sequences = []
 nameseq = []
+
+
 def main(file_path):
     try:
         with open("seq1.fasta", "r") as f:
             tmp = ""
             for l in f:
                 if l.startswith(">"):
-                    nameseq.append(l.strip().replace(">",""))
+                    nameseq.append(l.strip().replace(">", ""))
                     if tmp == "":
                         continue
                     else:
@@ -20,12 +23,38 @@ def main(file_path):
     except FileNotFoundError:
         print(f"Plik {file_path} nie został znaleziony.")
 
+def printMatrix(matrix):
+    for row in matrix:
+        for col in row:
+            print(col, end="\t")
+        print("")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Program do odczytu pliku FASTA")
-    parser.add_argument("-i","--input", default="seq1.fasta" , help="Ścieżka do pliku FASTA") #required=True w miejsce default  default="seq1.fasta"
+    parser.add_argument("-i", "--input", default="seq1.fasta",help="Ścieżka do pliku FASTA")  # required=True w miejsce default  default="seq1.fasta"
+    parser.add_argument("-g", "--gap", default=-2)
+    parser.add_argument("-m", "--match", default=1)
+    parser.add_argument("-mm", "--missmatch", default=-1)
     args = parser.parse_args()
     main(args.input)
+gap = args.gap
+match = args.match
+missmatch = args.missmatch
 rows = len(sequences[0])
 columns = len(sequences[1])
-matrix = [[0 for _ in range(columns)] for _ in range(rows+1)]
+matrix = [[0 for _ in range(columns+1)] for _ in range(rows+1)]
+for i in range(1,rows+1):
+    matrix[i][0] = matrix[i-1][0]+gap
+for j in range(1,columns+1):
+    matrix[0][j] = matrix[0][j-1]+gap
+for i in range(1,columns+1):
+    for j in range(1,rows+1):
+        up= matrix[i-1][j]+gap
+        left = matrix[i][j-1]+gap
+        if sequences[0][i-1] == sequences[1][j-1]:
+            diagonal = matrix[i-1][j-1] + match
+        else:
+            diagonal = matrix[i][j-1] + missmatch
+        matrix[i][j] = max(up,left,diagonal)
+
+printMatrix(matrix)
