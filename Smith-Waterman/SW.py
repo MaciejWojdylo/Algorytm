@@ -4,16 +4,20 @@ sequences = []
 
 def main(file_path):
     seq = ""
-    with open(file_path, "r") as file:
-        for line in file:
-            if not line.startswith(">"):
-                seq = seq + line.strip().upper()
-            else:
-                if not seq =="":
-                    sequences.append(seq)
-                    seq=""
-        sequences.append(seq)
-        print(sequences)
+    try:
+        with open(file_path, "r") as file:
+            for line in file:
+                if not line.startswith(">"):
+                    seq = seq + line.strip().upper()
+                else:
+                    if not seq == "":
+                        sequences.append(seq)
+                        seq = ""
+            sequences.append(seq)
+            print(sequences)
+    except FileNotFoundError:
+        print("File not found:\n", file_path)
+
 
 def show_matrix(matrix):
     for i in range(len(matrix)):
@@ -28,6 +32,7 @@ if __name__ == "__main__":
     parser.add_argument("-g", "--gap", default=-2)
     parser.add_argument("-m", "--match", default=1)
     parser.add_argument("-mm", "--missmatch", default=-1)
+    parser.add_argument("-o", "--output", default="result.txt", help="ścieżka do pliku wyjściowego")
     args = parser.parse_args()
     main(args.input)
 
@@ -89,7 +94,7 @@ while matrix[positionX][positionY] != 0:
         continue
 show_matrix(matrix)
 
-with open("result.txt", "w") as file:
+with open(args.output, "w") as file:
     file.write(seq1[::-1])
     file.write("\n")
     file.write(seq2[::-1])
