@@ -17,6 +17,7 @@ def main(file_path):
             print(sequences)
     except FileNotFoundError:
         print("File not found:\n", file_path)
+        exit(1)
 
 
 def show_matrix(matrix):
