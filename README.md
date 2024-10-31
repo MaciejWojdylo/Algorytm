@@ -8,9 +8,9 @@ w każdym folderze można znaleźć 2 pliki:
 Sekwencje które chcemy porównać muszą być napisane w formacie FASTA.
 
 np.
->Nazwa_Sekwencji
+ ">"Nazwa_Sekwencji
 Przykładowa sekwencja
->Nazwa_Drugiej_Sekwencji
+ ">"Nazwa_Drugiej_Sekwencji
 Przykładowa druga sekwencja
 
 Program nasz obsługuje tylko 2 sekwencje podanie tutaj większej ilości spowoduje braku wyniku dla innych sekwencji prócz pierwszej i drugiej.
