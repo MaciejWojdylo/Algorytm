@@ -8,10 +8,10 @@ w każdym folderze można znaleźć 2 pliki:
 Sekwencje które chcemy porównać muszą być napisane w formacie FASTA.
 
 np.
- ">"Nazwa_Sekwencji
-Przykładowa sekwencja
- ">"Nazwa_Drugiej_Sekwencji
-Przykładowa druga sekwencja
+ >Nazwa_Sekwencji
+   Przykładowa sekwencja
+ >Nazwa_Drugiej_Sekwencji
+   Przykładowa druga sekwencja
 
 Program nasz obsługuje tylko 2 sekwencje podanie tutaj większej ilości spowoduje braku wyniku dla innych sekwencji prócz pierwszej i drugiej.
 Nasz program nie dopuszcza różnicy wielkości znaków to znaczy że małe i duże litery będą tak samo traktowane 
